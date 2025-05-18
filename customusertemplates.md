@@ -36,4 +36,4 @@ Your template will have access to the following variables:
 
 ## Template Structure
 
-A basic template structure can be found <a href="/basictemplate.html">here </a>
+A basic template structure can be found <a href="/docs/basictemplate.html">here </a>
