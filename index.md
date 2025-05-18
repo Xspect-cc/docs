@@ -3,33 +3,138 @@ title: Home
 layout: home
 ---
 
-This is a *bare-minimum* template to create a Jekyll site that uses the [Just the Docs] theme. You can easily set the created site to be published on [GitHub Pages] – the [README] file explains how to do that, along with other details.
+# Creating Custom Profile Templates for Xspect
 
-If [Jekyll] is installed on your computer, you can also build and preview the created site *locally*. This lets you test changes before committing them, and avoids waiting for GitHub Pages.[^1] And you will be able to deploy your local build to a different platform than GitHub Pages.
+## Overview
+This guide will help you create custom profile templates for Xspect. Custom templates allow you to personalize how your profile page looks when users visit `/u/<username>`.
 
-More specifically, the created site:
+## Getting Started
 
-- uses a gem-based approach, i.e. uses a `Gemfile` and loads the `just-the-docs` gem
-- uses the [GitHub Pages / Actions workflow] to build and publish the site on GitHub Pages
+### Template Basics
+Templates in Xspect use the Jinja2 templating engine with HTML, CSS and JavaScript. Your template will receive specific variables containing user information.
 
-Other than that, you're free to customize sites that you create with this template, however you like. You can easily change the versions of `just-the-docs` and Jekyll it uses, as well as adding further plugins.
+### Available Variables
+Your template will have access to the following variables:
 
-[Browse our documentation][Just the Docs] to learn more about how to use this theme.
+- `username`: The user's username
+- `bio`: User biography text
+- `pfpurl`: URL to the user's profile picture
+- `bgurl`: URL to the user's background image
+- `discord`: Discord username (if set)
+- `email`: Email address (if set)
+- `telegram`: Telegram handle (if set)
+- `bio_music_link`: Music link in bio (if set)
+- `theme`: Theme ID number
+- `github`, `twitter`, `instagram`, `linkedin`: Social media usernames
+- `github_link`, `twitter_link`, `instagram_link`, `linkedin_link`: Full social media URLs
+- `is_premium`: Boolean indicating premium status
+- `is_helper`, `is_bughunter`, `is_og`, `is_developer`: Badge status booleans
+- `total_views`: Total profile view count
+- `daily_views`: Profile views in the last 24 hours
+- `profile_effect`, `mouse_effect`, `bg_effect`: Applied visual effects
+- `custom_badge_name`, `custom_badge_icon`, `custom_badge_type`: Custom badge information
 
-To get started with creating a site, simply:
+## Template Structure
 
-1. click "[use this template]" to create a GitHub repository
-2. go to Settings > Pages > Build and deployment > Source, and select GitHub Actions
-
-If you want to maintain your docs in the `docs` directory of an existing project repo, see [Hosting your docs from an existing project repo](https://github.com/just-the-docs/just-the-docs-template/blob/main/README.md#hosting-your-docs-from-an-existing-project-repo) in the template README.
-
-----
-
-[^1]: [It can take up to 10 minutes for changes to your site to publish after you push the changes to GitHub](https://docs.github.com/en/pages/setting-up-a-github-pages-site-with-jekyll/creating-a-github-pages-site-with-jekyll#creating-your-site).
-
-[Just the Docs]: https://just-the-docs.github.io/just-the-docs/
-[GitHub Pages]: https://docs.github.com/en/pages
-[README]: https://github.com/just-the-docs/just-the-docs-template/blob/main/README.md
-[Jekyll]: https://jekyllrb.com
-[GitHub Pages / Actions workflow]: https://github.blog/changelog/2022-07-27-github-pages-custom-github-actions-workflows-beta/
-[use this template]: https://github.com/just-the-docs/just-the-docs-template/generate
+A basic template structure looks like this:
+```html
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>{{ username }}'s Profile</title>
+      <style>
+         /* Your CSS here */
+         body {
+         font-family: 'Arial', sans-serif;
+         background-color: #121212;
+         color: #ffffff;
+         margin: 0;
+         padding: 0;
+         }
+         .profile-container {
+         max-width: 800px;
+         margin: 30px auto;
+         padding: 20px;
+         border-radius: 10px;
+         background-color: #1e1e1e;
+         }
+         .profile-header {
+         display: flex;
+         align-items: center;
+         margin-bottom: 20px;
+         }
+         .profile-pic {
+         width: 100px;
+         height: 100px;
+         border-radius: 50%;
+         object-fit: cover;
+         }
+         .username {
+         margin-left: 20px;
+         font-size: 24px;
+         font-weight: bold;
+         }
+         .bio {
+         margin-bottom: 20px;
+         line-height: 1.6;
+         }
+         .stats {
+         display: flex;
+         gap: 10px;
+         margin-bottom: 20px;
+         }
+         .stat {
+         background-color: #2a2a2a;
+         padding: 8px 12px;
+         border-radius: 5px;
+         font-size: 14px;
+         }
+         .social-links {
+         display: flex;
+         gap: 15px;
+         }
+         .social-link {
+         color: #ffffff;
+         text-decoration: none;
+         }
+         .social-link:hover {
+         text-decoration: underline;
+         }
+      </style>
+   </head>
+   <body>
+      <div class="profile-container">
+         <div class="profile-header">
+            <img src="{{ pfpurl }}" alt="{{ username }}" class="profile-pic">
+            <h1 class="username">{{ username }}</h1>
+         </div>
+         <div class="bio">
+            {{ bio }}
+         </div>
+         <div class="stats">
+            <div class="stat">Views: {{ total_views }}</div>
+            <div class="stat">Today: {{ daily_views }}</div>
+            {% if is_premium %}
+            <div class="stat">Premium User</div>
+            {% endif %}
+         </div>
+         <div class="social-links">
+            {% if discord %}
+            <a href="#" class="social-link">Discord: {{ discord }}</a
+            {% endif %}
+            {% if github %}
+            <a href="{{ github_link }}" class="social-link" target="_blank">GitHub</a>
+            {% endif %}
+            {% if twitter %}
+            <a href="{{ twitter_link }}" class="social-link" target="_blank">Twitter</a>
+            {% endif %}
+            {% if instagram %}
+            <a href="{{ instagram_link }}" class="social-link" target="_blank">Instagram</a>
+            {% endif %}
+         </div>
+      </div>
+   </body>
+</html>
+```
