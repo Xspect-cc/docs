@@ -1,0 +1,41 @@
+site_name: Xspect Docs
+site_url: "https://docs.xspect.cc"
+site_description: "The official xspect documentation"
+site_author: "Xspect Developers"
+repo_url: "https://github.com/Xspect-cc/docs"
+
+theme:
+  name: shadcn
+  show_title: false # show the title in the top bar
+  show_stargazers: false # show the stargazers in the top bar
+  pygments_style: # default styles 
+        light: shadcn-light
+        dark: github-dark
+
+  icon: heroicons:rocket-launch # use the shadcn svg if not defined
+  topbar_sections: true # NEW!
+  show_datetime: true 
+plugins:
+  - search # put it first to inject out custom code
+  - excalidraw
+  - mkdocstrings
+
+markdown_extensions:
+  admonition:
+  codehilite:
+  fenced_code:
+  footnotes:
+  extra:
+  pymdownx.blocks.details:
+  pymdownx.tabbed:
+  pymdownx.blocks.tab:
+    combine_header_slug: true
+    separator: ___
+  pymdownx.progressbar:
+  pymdownx.snippets:
+  pymdownx.arithmatex:
+    generic: true
+  shadcn.extensions.echarts.alpha:
+  shadcn.extensions.codexec:
+  shadcn.extensions.iconify:
+  
