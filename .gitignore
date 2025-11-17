@@ -25,6 +25,7 @@ skids/*
 *.sln
 *.sw?
 .env
-site/*
+site/
 logs/*
 server.py
+skids/

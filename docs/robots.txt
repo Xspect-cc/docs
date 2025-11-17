@@ -1,0 +1,12 @@
+# ▄▄ ▄▄  ▄▄▄▄ ▄▄▄▄  ▄▄▄▄▄  ▄▄▄▄ ▄▄▄▄▄▄      ▄▄▄▄  ▄▄▄▄ 
+# ▀█▄█▀ ███▄▄ ██▄█▀ ██▄▄  ██▀▀▀   ██       ██▀▀▀ ██▀▀▀ 
+# ██ ██ ▄▄██▀ ██    ██▄▄▄ ▀████   ██   ▄   ▀████ ▀████                                                                                                            
+#
+# |----------------------------------------------------|
+# | Xspect does not allow bots of any form             |
+# | We will report your IP to AbuseIPDB if we find you |
+# | attempting to scrape the site or search for        |
+# | vulnerabilities without explicit permission        |
+# |----------------------------------------------------|
+User-agent: *
+Disallow: /
